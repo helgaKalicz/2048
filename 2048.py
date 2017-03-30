@@ -459,6 +459,7 @@ while game < 1:
         printing()
         checking()
 # Exit button: 'q'
+
     elif key == ord('q'):
         curses.echo()
         curses.nocbreak()
