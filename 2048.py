@@ -1,9 +1,13 @@
 import coloring
 import display
-import os
 import welcome
 import sum_print
 import biglist
+import curses
+stdscr = curses.initscr()
+curses.noecho()
+curses.cbreak()
+stdscr.keypad(1)
 
 # First board printing
 board = biglist.board(2)
@@ -19,21 +23,21 @@ C6 = '\033[35m'		# Purple
 
 
 def printing():
-    os.system('clear')
+    stdscr.clear()
 
     partBetween1 = display.display_table(board[0])
     partBetween2 = display.display_table(board[1])
     partBetween3 = display.display_table(board[2])
     partBetween4 = display.display_table(board[3])
 
-    colored_a = coloring.coloring_list(board[0], C2)
-    colored_b = coloring.coloring_list(board[1], C2)
-    colored_c = coloring.coloring_list(board[2], C2)
-    colored_d = coloring.coloring_list(board[3], C2)
+    colored_a = coloring.coloring_list(board[0])
+    colored_b = coloring.coloring_list(board[1])
+    colored_c = coloring.coloring_list(board[2])
+    colored_d = coloring.coloring_list(board[3])
+
 
 # print part
-    sum_print.printer(colored_a, colored_b, colored_c, colored_d, partBetween1,
-                      partBetween2, partBetween3, partBetween4, score)
+    sum_print.printer(colored_a, colored_b, colored_c, colored_d, partBetween1, partBetween2, partBetween3, partBetween4, score)
 
 # checking the end of the game, in case if you achive 2048 or you don't have more moves
 
@@ -42,10 +46,15 @@ def checking():
     if ('2048' in board[0]) or ('2048' in board[1]) or ('2048' in board[2]) or ('2048' in board[3]):
         print()
         print(C2 + "You win!!!" + C0)
-        continue_game = input("Press \'y\' if you want to continue the game")
-        if continue_game == 'y':
+        print("Press \'y\' if you want to continue the game")
+        key = stdscr.getch()
+        if key == ord('y'):
             pass
         else:
+            curses.echo()
+            curses.nocbreak()
+            stdscr.keypad(0)
+            curses.endwin()
             quit()
     elif (board[0][0] == '0') or (board[0][1] == '0') or (board[0][2] == '0') or (board[0][3] == '0'):
         pass
@@ -75,6 +84,10 @@ def checking():
         print()
         print(C2 + "No more moves! Game over!" + C0)
         print()
+        curses.echo()
+        curses.nocbreak()
+        stdscr.keypad(0)
+        curses.endwin()
         quit()
 
 # Put 2 (90% of the cases) or 4 (10% of the cases) to an empty random place (if there is), if the board changed.
@@ -125,30 +138,31 @@ def randNum():
                 board[3][column] = twoOrFour
 
 
-welcome.floating_msg()
 game = 1
-print()
-print()
 while game == 1:
-    start = input(C2 + "Press \'s\' to start the game! (or \'x\' to EXIT): " + C0)
-    if start == "s":
+    key = stdscr.getch()
+    if key == ord('s'):
         score = int()
         dontMove = 1
         randNum()
         randNum()
         printing()
         game = 0
-    elif start == "x":
+    elif key == ord('q'):
+        curses.echo()
+        curses.nocbreak()
+        stdscr.keypad(0)
+        curses.endwin()
         quit()
     else:
         pass
 
 # The game starts here:
 while game < 1:
-    key = input(C2 + "Select a direction and press enter (use \'x\' to EXIT): " + C0)
+    key = stdscr.getch()
 # UP direction with 'w'
 # Exclusion of false movements caused by zeros
-    if key == "w":
+    if key == curses.KEY_UP:
         dontMove = 0
         for j in range(4):
             if board[0][j] == '0':
@@ -225,7 +239,7 @@ while game < 1:
         checking()
 
 # DOWN direction with 's'
-    elif key == "s":
+    elif key == curses.KEY_DOWN:
         dontMove = 0
         for j in range(4):
             if board[3][j] == '0':
@@ -303,7 +317,7 @@ while game < 1:
         checking()
 
 # LEFT direction with 'a'
-    elif key == "a":
+    elif key == curses.KEY_LEFT:
         dontMove = 0
 # LEFT First row
         if board[0][0] == '0':
@@ -570,12 +584,11 @@ while game < 1:
                 board[3][3] = '0'
                 dontMove = 1
         randNum()
-
         printing()
         checking()
 
 # RIGHT direction with 'd'
-    elif key == "d":
+    elif key == curses.KEY_RIGHT:
         dontMove = 0
 # RIGHT First row
         if board[0][3] == '0':
@@ -845,11 +858,12 @@ while game < 1:
 
         printing()
         checking()
-# Exit button: 'x'
-    elif key == "x":
-        print()
-        print(C2 + "Thank you for playing!" + C0)
-        print()
+# Exit button: 'q'
+    elif key == ord('q'):
+        curses.echo()
+        curses.nocbreak()
+        stdscr.keypad(0)
+        curses.endwin()
         quit()
 # Wrong button handling
     else:
