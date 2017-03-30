@@ -37,9 +37,6 @@ def printing():
 
 def checking():
     if ('2048' in board[0]) or ('2048' in board[1]) or ('2048' in board[2]) or ('2048' in board[3]):
-        print()
-        print(C2 + "You win!!!" + C0)
-        print("Press \'y\' if you want to continue the game")
         key = stdscr.getch()
         if key == ord('y'):
             pass
