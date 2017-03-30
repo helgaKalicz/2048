@@ -1,5 +1,7 @@
 import display
 import welcome
+import win
+import lose
 import sum_print
 import biglist
 import curses
@@ -10,15 +12,6 @@ stdscr.keypad(1)
 
 # First board printing
 board = biglist.board(2)
-
-# Colors:
-C0 = '\033[0m'		# Reset colour
-C1 = '\033[08m'		# Invisible
-C2 = '\033[92m'		# Green
-C3 = '\033[91m'		# Red
-C4 = '\033[96m'		# LightBlue
-C5 = '\033[34m'		# Blue
-C6 = '\033[35m'		# Purple
 
 
 def printing():
@@ -37,15 +30,17 @@ def printing():
 
 def checking():
     if ('2048' in board[0]) or ('2048' in board[1]) or ('2048' in board[2]) or ('2048' in board[3]):
+        stdscr.clear()
+        win.winning()
         key = stdscr.getch()
-        if key == ord('y'):
-            pass
-        else:
+        if key == ord('q'):
             curses.echo()
             curses.nocbreak()
             stdscr.keypad(0)
             curses.endwin()
             quit()
+        else:
+            pass
     elif (board[0][0] == ' ') or (board[0][1] == ' ') or (board[0][2] == ' ') or (board[0][3] == ' '):
         pass
     elif (board[1][0] == ' ') or (board[1][1] == ' ') or (board[1][2] == ' ') or (board[1][3] == ' '):
@@ -71,11 +66,16 @@ def checking():
     elif (board[3][3] == board[2][3]) or (board[3][3] == board[3][2]):
         pass
     else:
-        curses.echo()
-        curses.nocbreak()
-        stdscr.keypad(0)
-        curses.endwin()
-        quit()
+        stdscr.clear()
+        lose.losing()
+        key = stdscr.getch()
+        if key == ord('q'):
+            curses.echo()
+            curses.nocbreak()
+            stdscr.keypad(0)
+            curses.endwin()
+        else:
+            pass
 
 # Put 2 (90% of the cases) or 4 (10% of the cases) to an empty random place (if there is), if the board changed.
 
@@ -124,7 +124,7 @@ def randNum():
             if row == "d":
                 board[3][column] = twoOrFour
 
-
+welcome.floating_msg()
 game = 1
 while game == 1:
     key = stdscr.getch()
