@@ -352,7 +352,7 @@ while game < 1:
                             if board[j][2] == ' ':
                                 board[j][2] = board[j][3]
                                 board[j][3] = ' '
-       
+
 # LEFT to add up similar numbers
         for j in range(4):
             if board[j][0] != ' ':
