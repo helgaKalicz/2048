@@ -8,7 +8,7 @@ C5 = '\033[34m'		# Blue
 C6 = '\033[35m'		# Purple
 
 
-def coolStart():
+def floating_msg():
     import time
     print()
     print()
@@ -52,4 +52,3 @@ def coolStart():
     time.sleep(0.1)
     print(C5+'                                ╚══════╝ ╚═════╝      ╚═╝ ╚════╝'+C0)
     time.sleep(0.9)
-coolStart()

@@ -1,3 +1,15 @@
+import coloring
+import display
+import os
+import welcome
+import sum_print
+
+# First board printing
+a = ['1024', '1024', '0', '0']
+b = ['0', '0', '0', '0']
+c = ['0', '0', '0', '0']
+d = ['0', '0', '0', '0']
+
 # Colors:
 C0 = '\033[0m'		# Reset colour
 C1 = '\033[08m'		# Invisible
@@ -7,251 +19,21 @@ C4 = '\033[96m'		# LightBlue
 C5 = '\033[34m'		# Blue
 C6 = '\033[35m'		# Purple
 
-
-
 def printing():
 	os.system('clear')
 
-# colour part, 0 is invisible
-
-	if a[0] == '0':
-		a0 = C1+(a[0])+C0
-	else:
-		a0 = C2+(a[0])+C0
-	if a[1] == '0':
-		a1 = C1+(a[1])+C0
-	else:
-		a1 = C2+(a[1])+C0
-	if a[2] == '0':
-		a2 = C1+(a[2])+C0
-	else:
-		a2 = C2+(a[2])+C0
-	if a[3] == '0':
-		a3 = C1+(a[3])+C0
-	else:
-		a3 = C2+(a[3])+C0
-	if b[0] == '0':
-		b0 = C1+(b[0])+C0
-	else:
-		b0 = C2+(b[0])+C0
-	if b[1] == '0':
-		b1 = C1+(b[1])+C0
-	else:
-		b1 = C2+(b[1])+C0
-	if b[2] == '0':
-		b2 = C1+(b[2])+C0
-	else:
-		b2 = C2+(b[2])+C0
-	if b[3] == '0':
-		b3 = C1+(b[3])+C0
-	else:
-		b3 = C2+(b[3])+C0
-	if c[0] == '0':
-		c0 = C1+(c[0])+C0
-	else:
-		c0 = C2+(c[0])+C0
-	if c[1] == '0':
-		c1 = C1+(c[1])+C0
-	else:
-		c1 = C2+(c[1])+C0
-	if c[2] == '0':
-		c2 = C1+(c[2])+C0
-	else:
-		c2 = C2+(c[2])+C0
-	if c[3] == '0':
-		c3 = C1+(c[3])+C0
-	else:
-		c3 = C2+(c[3])+C0
-	if d[0] == '0':
-		d0 = C1+(d[0])+C0
-	else:
-		d0 = C2+(d[0])+C0
-	if d[1] == '0':
-		d1 = C1+(d[1])+C0
-	else:
-		d1 = C2+(d[1])+C0
-	if d[2] == '0':
-		d2 = C1+(d[2])+C0
-	else:
-		d2 = C2+(d[2])+C0
-	if d[3] == '0':
-		d3 = C1+(d[3])+C0
-	else:
-		d3 = C2+(d[3])+C0
-
-# handling several digit numbers, first row
-	one_digit = '   │  '
-	two_digits = '  │  '
-	three_digits = ' │  '
-	four_digits = '│  '
-	if len(str(a[0])) == 1:
-		partBetween1 = one_digit
-	elif len(str(a[0])) == 2:
-		partBetween1 = two_digits
-	elif len(str(a[0])) == 3:
-		partBetween1 = three_digits
-	elif len(str(a[0])) == 4:
-		partBetween1 = four_digits
-
-	if len(str(a[1])) == 1:
-		partBetween2 = one_digit
-	elif len(str(a[1])) == 2:
-		partBetween2 = two_digits
-	elif len(str(a[1])) == 3:
-		partBetween2 = three_digits
-	elif len(str(a[1])) == 4:
-		partBetween2 = four_digits
-
-	if len(str(a[2])) == 1:
-		partBetween3 = one_digit
-	elif len(str(a[2])) == 2:
-		partBetween3 = two_digits
-	elif len(str(a[2])) == 3:
-		partBetween3 = three_digits
-	elif len(str(a[2])) == 4:
-		partBetween3 = four_digits
+	partBetween1 = display.display_table(a)
+	partBetween2 = display.display_table(b)
+	partBetween3 = display.display_table(c)
+	partBetween4 = display.display_table(d)
 	
-	if len(str(a[3])) == 1:
-		partRight1 = one_digit
-	elif len(str(a[3])) == 2:
-		partRight1 = two_digits
-	elif len(str(a[3])) == 3:
-		partRight1 = three_digits
-	elif len(str(a[3])) == 4:
-		partRight1 = four_digits
-
-# digits: second row
-	if len(str(b[0])) == 1:
-		partBetween4 = one_digit
-	elif len(str(b[0])) == 2:
-		partBetween4 = two_digits
-	elif len(str(b[0])) == 3:
-		partBetween4 = three_digits
-	elif len(str(b[0])) == 4:
-		partBetween4 = four_digits
-
-	if len(str(b[1])) == 1:
-		partBetween5 = one_digit
-	elif len(str(b[1])) == 2:
-		partBetween5 = two_digits
-	elif len(str(b[1])) == 3:
-		partBetween5 = three_digits
-	elif len(str(b[1])) == 4:
-		partBetween5 = four_digits
-
-	if len(str(b[2])) == 1:
-		partBetween6 = one_digit
-	elif len(str(b[2])) == 2:
-		partBetween6 = two_digits
-	elif len(str(b[2])) == 3:
-		partBetween6 = three_digits
-	elif len(str(b[2])) == 4:
-		partBetween6 = four_digits
-	
-	if len(str(b[3])) == 1:
-		partRight2 = one_digit
-	elif len(str(b[3])) == 2:
-		partRight2 = two_digits
-	elif len(str(b[3])) == 3:
-		partRight2 = three_digits
-	elif len(str(b[3])) == 4:
-		partRight2 = four_digits
-
-# digits: third row
-	if len(str(c[0])) == 1:
-		partBetween7 = one_digit
-	elif len(str(c[0])) == 2:
-		partBetween7 = two_digits
-	elif len(str(c[0])) == 3:
-		partBetween7 = three_digits
-	elif len(str(c[0])) == 4:
-		partBetween7 = four_digits
-
-	if len(str(c[1])) == 1:
-		partBetween8 = one_digit
-	elif len(str(c[1])) == 2:
-		partBetween8 = two_digits
-	elif len(str(c[1])) == 3:
-		partBetween8 = three_digits
-	elif len(str(c[1])) == 4:
-		partBetween8 = four_digits
-
-	if len(str(c[2])) == 1:
-		partBetween9 = one_digit
-	elif len(str(c[2])) == 2:
-		partBetween9 = two_digits
-	elif len(str(c[2])) == 3:
-		partBetween9 = three_digits
-	elif len(str(c[2])) == 4:
-		partBetween9 = four_digits
-	
-	if len(str(c[3])) == 1:
-		partRight3 = one_digit
-	elif len(str(c[3])) == 2:
-		partRight3 = two_digits
-	elif len(str(c[3])) == 3:
-		partRight3 = three_digits
-	elif len(str(c[3])) == 4:
-		partRight3 = four_digits
-
-# digits: fourth row
-	if len(str(d[0])) == 1:
-		partBetween10 = one_digit
-	elif len(str(d[0])) == 2:
-		partBetween10 = two_digits
-	elif len(str(d[0])) == 3:
-		partBetween10 = three_digits
-	elif len(str(d[0])) == 4:
-		partBetween10 = four_digits
-
-	if len(str(d[1])) == 1:
-		partBetween11 = one_digit
-	elif len(str(d[1])) == 2:
-		partBetween11 = two_digits
-	elif len(str(d[1])) == 3:
-		partBetween11 = three_digits
-	elif len(str(d[1])) == 4:
-		partBetween11 = four_digits
-
-	if len(str(d[2])) == 1:
-		partBetween12 = one_digit
-	elif len(str(d[2])) == 2:
-		partBetween12 = two_digits
-	elif len(str(d[2])) == 3:
-		partBetween12 = three_digits
-	elif len(str(d[2])) == 4:
-		partBetween12 = four_digits
-	
-	if len(str(d[3])) == 1:
-		partRight4 = one_digit
-	elif len(str(d[3])) == 2:
-		partRight4 = two_digits
-	elif len(str(d[3])) == 3:
-		partRight4 = three_digits
-	elif len(str(d[3])) == 4:
-		partRight4 = four_digits
+	colored_a = coloring.coloring_list(a,C2)
+	colored_b = coloring.coloring_list(b,C2)
+	colored_c = coloring.coloring_list(c,C2)
+	colored_d = coloring.coloring_list(d,C2)
 
 # print part
-	print(C2 + "Score:" + C4 + " " + str(score) + C0)
-	print()
-	print(C3+'                                     ┌──────┬──────┬──────┬──────┐' + C0)
-	print(C3+'                                     │      │      │      │      │' + C0)
-	print(C3+'                                     │  ' + C0 + a0 + C3 + partBetween1 + C0 + a1 + C3 + partBetween2 + C0 + a2 + C3 + partBetween3 + C0 + a3 + C3 + partRight1 + C0)
-	print(C3+'                                     │      │      │      │      │' + C0)
-	print(C3+'                                     ├──────┼──────┼──────┼──────┤' + C0)
-	print(C3+'                                     │      │      │      │      │' + C0)
-	print(C3+'                                     │  ' + C0 + b0 + C3 + partBetween4 + C0 + b1 + C3 + partBetween5 + C0 + b2 + C3 + partBetween6 + C0 + b3 + C3 + partRight2 + C0)
-	print(C3+'                                     │      │      │      │      │' + C0)
-	print(C3+'                                     ├──────┼──────┼──────┼──────┤' + C0)
-	print(C3+'                                     │      │      │      │      │' + C0)
-	print(C3+'                                     │  ' + C0 + c0 + C3 + partBetween7 + C0 + c1 + C3 + partBetween8 + C0 + c2 + C3 + partBetween9 + C0 + c3 + C3 + partRight3 + C0)
-	print(C3+'                                     │      │      │      │      │' + C0)
-	print(C3+'                                     ├──────┼──────┼──────┼──────┤' + C0)
-	print(C3+'                                     │      │      │      │      │' + C0)
-	print(C3+'                                     │  ' + C0 + d0 + C3 + partBetween10 + C0 + d1 + C3 + partBetween11 + C0 + d2 + C3 + partBetween12 + C0 + d3 + C3 + partRight4 + C0)
-	print(C3+'                                     │      │      │      │      │' + C0)
-	print(C3+'                                     └──────┴──────┴──────┴──────┘' + C0)
-	print()
+	sum_print.printer(colored_a, colored_b, colored_c, colored_d, partBetween1, partBetween2, partBetween3, partBetween4, score)
 
 # checking the end of the game, in case if you achive 2048 or you don't have more moves
 def checking():
@@ -338,15 +120,7 @@ def randNum():
 			if row == "d":
 				d[column] = twoOrFour
 
-# First board printing
-a = ['0', '0', '0', '0']
-b = ['0', '0', '0', '0']
-c = ['0', '0', '0', '0']
-d = ['0', '0', '0', '0']
-board_size = 4
-
-from functions2048 import coolStart
-import os
+welcome.floating_msg()
 game = 1
 print()
 print()
@@ -441,6 +215,7 @@ while game < 1:
 					dontMove = 1
 			j = j + 1
 		randNum()
+
 		printing()
 		checking()
 
@@ -518,6 +293,7 @@ while game < 1:
 					dontMove = 1
 			j = j + 1
 		randNum()
+
 		printing()
 		checking()
 
@@ -789,6 +565,7 @@ while game < 1:
 				d[3] = '0'
 				dontMove = 1
 		randNum()
+
 		printing()
 		checking()
 
@@ -1060,6 +837,7 @@ while game < 1:
 				d[0] = '0'
 				dontMove = 1
 		randNum()
+
 		printing()
 		checking()
 # Exit button: 'x'
