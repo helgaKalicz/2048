@@ -319,182 +319,53 @@ while game < 1:
 # LEFT direction with 'a'
     elif key == curses.KEY_LEFT:
         dontMove = 0
-# LEFT First row
-        if board[0][0] == '0':
-            if board[0][1] == '0':
-                if board[0][2] == '0':
-                    if board[0][3] == '0':
-                        pass
+        for j in range(4):
+            if board[j][0] == '0':
+                if board[j][1] == '0':
+                    if board[j][2] == '0':
+                        if board[j][3] == '0':
+                            pass
+                        else:
+                            dontMove = 1
                     else:
                         dontMove = 1
                 else:
                     dontMove = 1
             else:
-                dontMove = 1
-        else:
-            if board[0][1] == '0':
-                if board[0][2] == '0':
-                    if board[0][3] == '0':
-                        pass
+                if board[j][1] == '0':
+                    if board[j][2] == '0':
+                        if board[j][3] == '0':
+                            pass
+                        else:
+                            dontMove = 1
                     else:
                         dontMove = 1
                 else:
-                    dontMove = 1
-            else:
-                if board[0][2] == '0':
-                    if board[0][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-# LEFT Second row
-        if board[1][0] == '0':
-            if board[1][1] == '0':
-                if board[1][2] == '0':
-                    if board[1][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                dontMove = 1
-        else:
-            if board[1][1] == '0':
-                if board[1][2] == '0':
-                    if board[1][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                if board[1][2] == '0':
-                    if board[1][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-# LEFT Third row
-        if board[2][0] == 0:
-            if board[2][1] == 0:
-                if board[2][2] == 0:
-                    if board[2][3] == 0:
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                dontMove = 1
-        else:
-            if board[2][1] == '0':
-                if board[2][2] == '0':
-                    if board[2][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                if board[2][2] == '0':
-                    if board[2][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-# LEFT Fourth row
-        if board[3][0] == '0':
-            if board[3][1] == '0':
-                if board[3][2] == '0':
-                    if board[3][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                dontMove = 1
-        else:
-            if board[3][1] == '0':
-                if board[3][2] == '0':
-                    if board[3][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                if board[3][2] == '0':
-                    if board[3][3] == '0':
-                        pass
-                    else:
-                        dontMove = 1
+                    if board[j][2] == '0':
+                        if board[j][3] == '0':
+                            pass
+                        else:
+                            dontMove = 1
+
 # LEFT sorting, first row
-        for i in range(3):
-            if board[0][0] == '0':
-                board[0][0] = board[0][1]
-                board[0][1] = board[0][2]
-                board[0][2] = board[0][3]
-                board[0][3] = '0'
-            else:
-                for i in range(2):
-                    if board[0][1] == '0':
-                        board[0][1] = board[0][2]
-                        board[0][2] = board[0][3]
-                        board[0][3] = '0'
-                    else:
-                        if board[0][2] == '0':
-                            board[0][2] = board[0][3]
-                            board[0][3] = '0'
-# LEFT sorting, second row
-        for i in range(3):
-            if board[1][0] == '0':
-                board[1][0] = board[1][1]
-                board[1][1] = board[1][2]
-                board[1][2] = board[1][3]
-                board[1][3] = '0'
-            else:
-                for i in range(2):
-                    if board[1][1] == '0':
-                        board[1][1] = board[1][2]
-                        board[1][2] = board[1][3]
-                        board[1][3] = '0'
-                    else:
-                        if board[1][2] == '0':
-                            board[1][2] = board[1][3]
-                            board[1][3] = '0'
-# LEFT sorting, third row
-        for i in range(3):
-            if board[2][0] == '0':
-                board[2][0] = board[2][1]
-                board[2][1] = board[2][2]
-                board[2][2] = board[2][3]
-                board[2][3] = '0'
-            else:
-                for i in range(2):
-                    if board[2][1] == '0':
-                        board[2][1] = board[2][2]
-                        board[2][2] = board[2][3]
-                        board[2][3] = '0'
-                    else:
-                        if board[2][2] == '0':
-                            board[2][2] = board[2][3]
-                            board[2][3] = '0'
-# LEFT sorting, fourth row
-        for i in range(3):
-            if board[3][0] == '0':
-                board[3][0] = board[3][1]
-                board[3][1] = board[3][2]
-                board[3][2] = board[3][3]
-                board[3][3] = '0'
-            else:
-                for i in range(2):
-                    if board[3][1] == '0':
-                        board[3][1] = board[3][2]
-                        board[3][2] = board[3][3]
-                        board[3][3] = '0'
-                    else:
-                        if board[3][2] == '0':
-                            board[3][2] = board[3][3]
-                            board[3][3] = '0'
+        for j in range(4):
+            for i in range(3):
+                if board[j][0] == '0':
+                    board[j][0] = board[j][1]
+                    board[j][1] = board[j][2]
+                    board[j][2] = board[j][3]
+                    board[j][3] = '0'
+                else:
+                    for i in range(2):
+                        if board[j][1] == '0':
+                            board[j][1] = board[j][2]
+                            board[j][2] = board[j][3]
+                            board[j][3] = '0'
+                        else:
+                            if board[j][2] == '0':
+                                board[j][2] = board[j][3]
+                                board[j][3] = '0'
+       
 # LEFT to add up similar numbers, first row
         if board[0][0] != '0':
             if board[0][0] == board[0][1]:
