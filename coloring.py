@@ -7,6 +7,7 @@ C4 = '\033[96m'		# LightBlue
 C5 = '\033[34m'		# Blue
 C6 = '\033[35m'		# Purple
 
+
 def coloring_list(your_list):
     '''
     Hide the value if it is 0.
@@ -14,7 +15,7 @@ def coloring_list(your_list):
     '''
     colored_list = []
     for item in your_list:
-        if item == "0":
+        if item == " ":
             item = str(item)
             colored_list.append(item)
         else:
