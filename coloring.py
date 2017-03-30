@@ -14,7 +14,7 @@ def coloring_list(your_list):
     '''
     colored_list = []
     for item in your_list:
-        if item == "0":
+        if item == " ":
             item = str(item)
             colored_list.append(item)
         else:

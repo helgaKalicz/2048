@@ -1,7 +1,7 @@
 def printer(first_row_list, second_row_list, third_row_list, fourth_row_list, first_row_display, second_row_display, third_row_display, fourth_row_display, label):
     import curses
     stdscr = curses.initscr()
-    arrange_center = ' '*37
+    arrange_center = '                                      '
     frame_top = '┌──────┬──────┬──────┬──────┐'
     frame_boarder = '│      │      │      │      │'
     arrange_center1 = '│  '

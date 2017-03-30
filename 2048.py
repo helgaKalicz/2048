@@ -56,13 +56,13 @@ def checking():
             stdscr.keypad(0)
             curses.endwin()
             quit()
-    elif (board[0][0] == '0') or (board[0][1] == '0') or (board[0][2] == '0') or (board[0][3] == '0'):
+    elif (board[0][0] == ' ') or (board[0][1] == ' ') or (board[0][2] == ' ') or (board[0][3] == ' '):
         pass
-    elif (board[1][0] == '0') or (board[1][1] == '0') or (board[1][2] == '0') or (board[1][3] == '0'):
+    elif (board[1][0] == ' ') or (board[1][1] == ' ') or (board[1][2] == ' ') or (board[1][3] == ' '):
         pass
-    elif (board[2][0] == '0') or (board[2][1] == '0') or (board[2][2] == '0') or (board[2][3] == '0'):
+    elif (board[2][0] == ' ') or (board[2][1] == ' ') or (board[2][2] == ' ') or (board[2][3] == ' '):
         pass
-    elif (board[3][0] == '0') or (board[3][1] == '0') or (board[3][2] == '0') or (board[3][3] == '0'):
+    elif (board[3][0] == ' ') or (board[3][1] == ' ') or (board[3][2] == ' ') or (board[3][3] == ' '):
         pass
     elif (board[0][0] == board[0][1]) or (board[0][0] == board[1][0]):
         pass
@@ -98,22 +98,22 @@ def randNum():
         randomList = list()
         randomItem = list()
         for i in range(len(board[0])):
-            if board[0][i] == '0':
+            if board[0][i] == ' ':
                 randomItem.append(i)
                 randomList.append("a")
 
         for i in range(len(board[1])):
-            if board[1][i] == '0':
+            if board[1][i] == ' ':
                 randomItem.append(i)
                 randomList.append("b")
 
         for i in range(len(board[2])):
-            if board[2][i] == '0':
+            if board[2][i] == ' ':
                 randomItem.append(i)
                 randomList.append("c")
 
         for i in range(len(board[3])):
-            if board[3][i] == '0':
+            if board[3][i] == ' ':
                 randomItem.append(i)
                 randomList.append("d")
 # 2 or 4
@@ -141,7 +141,7 @@ def randNum():
 game = 1
 while game == 1:
     key = stdscr.getch()
-    if key == ord('s'):
+    if key == curses.KEY_ENTER or key == 10 or key == 13:
         score = int()
         dontMove = 1
         randNum()
@@ -165,10 +165,10 @@ while game < 1:
     if key == curses.KEY_UP:
         dontMove = 0
         for j in range(4):
-            if board[0][j] == '0':
-                if board[1][j] == '0':
-                    if board[2][j] == '0':
-                        if board[3][j] == '0':
+            if board[0][j] == ' ':
+                if board[1][j] == ' ':
+                    if board[2][j] == ' ':
+                        if board[3][j] == ' ':
                             pass
                         else:
                             dontMove = 1
@@ -177,64 +177,63 @@ while game < 1:
                 else:
                     dontMove = 1
             else:
-                if board[1][j] == '0':
-                    if board[2][j] == '0':
-                        if board[3][j] == '0':
+                if board[1][j] == ' ':
+                    if board[2][j] == ' ':
+                        if board[3][j] == ' ':
                             pass
                         else:
                             dontMove = 1
                     else:
                         dontMove = 1
                 else:
-                    if board[2][j] == '0':
-                        if board[3][j] == '0':
+                    if board[2][j] == ' ':
+                        if board[3][j] == ' ':
                             pass
                         else:
                             dontMove = 1
 # UP sorting
         for j in range(4):
             for i in range(3):
-                if board[0][j] == '0':
+                if board[0][j] == ' ':
                     board[0][j] = board[1][j]
                     board[1][j] = board[2][j]
                     board[2][j] = board[3][j]
-                    board[3][j] = '0'
+                    board[3][j] = ' '
                 else:
                     for i in range(2):
-                        if board[1][j] == '0':
+                        if board[1][j] == ' ':
                             board[1][j] = board[2][j]
                             board[2][j] = board[3][j]
-                            board[3][j] = '0'
+                            board[3][j] = ' '
                         else:
-                            if board[2][j] == '0':
+                            if board[2][j] == ' ':
                                 board[2][j] = board[3][j]
-                                board[3][j] = '0'
+                                board[3][j] = ' '
 # UP to add up similar numbers
         for j in range(4):
-            if board[0][j] != '0':
+            if board[0][j] != ' ':
                 if board[0][j] == board[1][j]:
                     board[0][j] = str(int(board[0][j]) + int(board[1][j]))
                     score = score + int(board[0][j])
                     board[1][j] = board[2][j]
                     board[2][j] = board[3][j]
-                    board[3][j] = '0'
+                    board[3][j] = ' '
                     dontMove = 1
-            if board[1][j] != '0':
+            if board[1][j] != ' ':
                 if board[1][j] == board[2][j]:
                     board[1][j] = str(int(board[1][j]) + int(board[2][j]))
                     score = score + int(board[1][j])
                     board[2][j] = board[3][j]
-                    board[3][j] = '0'
+                    board[3][j] = ' '
                     dontMove = 1
-            if board[2][j] != '0':
+            if board[2][j] != ' ':
                 if board[2][j] == board[3][j]:
                     board[2][j] = str(int(board[2][j]) + int(board[3][j]))
                     score = score + int(board[2][j])
-                    board[3][j] = '0'
+                    board[3][j] = ' '
                     dontMove = 1
-            j = j + 1
-        randNum()
 
+        randNum()
         printing()
         checking()
 
@@ -242,10 +241,10 @@ while game < 1:
     elif key == curses.KEY_DOWN:
         dontMove = 0
         for j in range(4):
-            if board[3][j] == '0':
-                if board[2][j] == '0':
-                    if board[1][j] == '0':
-                        if board[0][j] == '0':
+            if board[3][j] == ' ':
+                if board[2][j] == ' ':
+                    if board[1][j] == ' ':
+                        if board[0][j] == ' ':
                             pass
                         else:
                             dontMove = 1
@@ -254,65 +253,63 @@ while game < 1:
                 else:
                     dontMove = 1
             else:
-                if board[2][j] == '0':
-                    if board[1][j] == '0':
-                        if board[0][j] == '0':
+                if board[2][j] == ' ':
+                    if board[1][j] == ' ':
+                        if board[0][j] == ' ':
                             pass
                         else:
                             dontMove = 1
                     else:
                         dontMove = 1
                 else:
-                    if board[1][j] == '0':
-                        if board[0][j] == '0':
+                    if board[1][j] == ' ':
+                        if board[0][j] == ' ':
                             pass
                         else:
                             dontMove = 1
 # DOWN sorting
         for j in range(4):
             for i in range(3):
-                if board[3][j] == '0':
+                if board[3][j] == ' ':
                     board[3][j] = board[2][j]
                     board[2][j] = board[1][j]
                     board[1][j] = board[0][j]
-                    board[0][j] = '0'
+                    board[0][j] = ' '
                 else:
                     for i in range(2):
-                        if board[2][j] == '0':
+                        if board[2][j] == ' ':
                             board[2][j] = board[1][j]
                             board[1][j] = board[0][j]
-                            board[0][j] = '0'
+                            board[0][j] = ' '
                         else:
-                            if board[1][j] == '0':
+                            if board[1][j] == ' ':
                                 board[1][j] = board[0][j]
-                                board[0][j] = '0'
+                                board[0][j] = ' '
 # DOWN to add up similar numbers
-        j = 0
-        while j < 4:
-            if board[3][j] != '0':
+        for j in range(4):
+            if board[3][j] != ' ':
                 if board[3][j] == board[2][j]:
                     board[3][j] = str(int(board[3][j]) + int(board[2][j]))
                     score = score + int(board[3][j])
                     board[2][j] = board[1][j]
                     board[1][j] = board[0][j]
-                    board[0][j] = '0'
+                    board[0][j] = ' '
                     dontMove = 1
-            if board[2][j] != '0':
+            if board[2][j] != ' ':
                 if board[2][j] == board[1][j]:
                     board[2][j] = str(int(board[2][j]) + int(board[1][j]))
                     score = score + int(board[2][j])
                     board[1][j] = board[0][j]
-                    board[0][j] = '0'
+                    board[0][j] = ' '
                     dontMove = 1
-            if board[1][j] != '0':
+            if board[1][j] != ' ':
                 if board[1][j] == board[0][j]:
                     board[1][j] = str(int(board[1][j]) + int(board[0][j]))
                     score = score + int(board[1][j])
-                    board[0][j] = '0'
+                    board[0][j] = ' '
                     dontMove = 1
-            j = j + 1
-        randNum()
 
+        randNum()
         printing()
         checking()
 
@@ -320,10 +317,10 @@ while game < 1:
     elif key == curses.KEY_LEFT:
         dontMove = 0
         for j in range(4):
-            if board[j][0] == '0':
-                if board[j][1] == '0':
-                    if board[j][2] == '0':
-                        if board[j][3] == '0':
+            if board[j][0] == ' ':
+                if board[j][1] == ' ':
+                    if board[j][2] == ' ':
+                        if board[j][3] == ' ':
                             pass
                         else:
                             dontMove = 1
@@ -332,128 +329,63 @@ while game < 1:
                 else:
                     dontMove = 1
             else:
-                if board[j][1] == '0':
-                    if board[j][2] == '0':
-                        if board[j][3] == '0':
+                if board[j][1] == ' ':
+                    if board[j][2] == ' ':
+                        if board[j][3] == ' ':
                             pass
                         else:
                             dontMove = 1
                     else:
                         dontMove = 1
                 else:
-                    if board[j][2] == '0':
-                        if board[j][3] == '0':
+                    if board[j][2] == ' ':
+                        if board[j][3] == ' ':
                             pass
                         else:
                             dontMove = 1
 
-# LEFT sorting, first row
+# LEFT sorting
         for j in range(4):
             for i in range(3):
-                if board[j][0] == '0':
+                if board[j][0] == ' ':
                     board[j][0] = board[j][1]
                     board[j][1] = board[j][2]
                     board[j][2] = board[j][3]
-                    board[j][3] = '0'
+                    board[j][3] = ' '
                 else:
                     for i in range(2):
-                        if board[j][1] == '0':
+                        if board[j][1] == ' ':
                             board[j][1] = board[j][2]
                             board[j][2] = board[j][3]
-                            board[j][3] = '0'
+                            board[j][3] = ' '
                         else:
-                            if board[j][2] == '0':
+                            if board[j][2] == ' ':
                                 board[j][2] = board[j][3]
-                                board[j][3] = '0'
+                                board[j][3] = ' '
        
-# LEFT to add up similar numbers, first row
-        if board[0][0] != '0':
-            if board[0][0] == board[0][1]:
-                board[0][0] = str(int(board[0][0]) + int(board[0][1]))
-                score = score + int(board[0][0])
-                board[0][1] = board[0][2]
-                board[0][2] = board[0][3]
-                board[0][3] = '0'
-                dontMove = 1
-        if board[0][1] != '0':
-            if board[0][1] == board[0][2]:
-                board[0][1] = str(int(board[0][1]) + int(board[0][2]))
-                score = score + int(board[0][1])
-                board[0][2] = board[0][3]
-                board[0][3] = '0'
-                dontMove = 1
-        if board[0][2] != '0':
-            if board[0][2] == board[0][3]:
-                board[0][2] = str(int(board[0][2]) + int(board[0][3]))
-                score = score + int(board[0][2])
-                board[0][3] = '0'
-                dontMove = 1
-# LEFT to add up similar numbers, second row
-        if board[1][0] != '0':
-            if board[1][0] == board[1][1]:
-                board[1][0] = str(int(board[1][0]) + int(board[1][1]))
-                score = score + int(board[1][0])
-                board[1][1] = board[1][2]
-                board[1][2] = board[1][3]
-                board[1][3] = '0'
-                dontMove = 1
-        if board[1][1] != '0':
-            if board[1][1] == board[1][2]:
-                board[1][1] = str(int(board[1][1]) + int(board[1][2]))
-                score = score + int(board[1][1])
-                board[1][2] = board[1][3]
-                board[1][3] = '0'
-                dontMove = 1
-        if board[1][2] != '0':
-            if board[1][2] == board[1][3]:
-                board[1][2] = str(int(board[1][2]) + int(board[1][3]))
-                score = score + int(board[1][2])
-                board[1][3] = '0'
-                dontMove = 1
-# LEFT to add up similar numbers, third row
-        if board[2][0] != '0':
-            if board[2][0] == board[2][1]:
-                board[2][0] = str(int(board[2][0]) + int(board[2][1]))
-                score = score + int(board[2][0])
-                board[2][1] = board[2][2]
-                board[2][2] = board[2][3]
-                board[2][3] = '0'
-                dontMove = 1
-        if board[2][1] != '0':
-            if board[2][1] == board[2][2]:
-                board[2][1] = str(int(board[2][1]) + int(board[2][2]))
-                score = score + int(board[2][1])
-                board[2][2] = board[2][3]
-                board[2][3] = '0'
-                dontMove = 1
-        if board[2][2] != '0':
-            if board[2][2] == board[2][3]:
-                board[2][2] = str(int(board[2][2]) + int(board[2][3]))
-                score = score + int(board[2][2])
-                board[2][3] = '0'
-                dontMove = 1
-# LEFT to add up similar numbers, fourth row
-        if board[3][0] != '0':
-            if board[3][0] == board[3][1]:
-                board[3][0] = str(int(board[3][0]) + int(board[3][1]))
-                score = score + int(board[3][0])
-                board[3][1] = board[3][2]
-                board[3][2] = board[3][3]
-                board[3][3] = '0'
-                dontMove = 1
-        if board[3][1] != '0':
-            if board[3][1] == board[3][2]:
-                board[3][1] = str(int(board[3][1]) + int(board[3][2]))
-                score = score + int(board[3][1])
-                board[3][2] = board[3][3]
-                board[3][3] = '0'
-                dontMove = 1
-        if board[3][2] != '0':
-            if board[3][2] == board[3][3]:
-                board[3][2] = str(int(board[3][2]) + int(board[3][3]))
-                score = score + int(board[3][2])
-                board[3][3] = '0'
-                dontMove = 1
+# LEFT to add up similar numbers
+        for j in range(4):
+            if board[j][0] != ' ':
+                if board[j][0] == board[j][1]:
+                    board[j][0] = str(int(board[j][0]) + int(board[j][1]))
+                    score = score + int(board[j][0])
+                    board[j][1] = board[j][2]
+                    board[j][2] = board[j][3]
+                    board[j][3] = ' '
+                    dontMove = 1
+            if board[j][1] != ' ':
+                if board[j][1] == board[j][2]:
+                    board[j][1] = str(int(board[j][1]) + int(board[j][2]))
+                    score = score + int(board[j][1])
+                    board[j][2] = board[j][3]
+                    board[j][3] = ' '
+                    dontMove = 1
+            if board[j][2] != ' ':
+                if board[j][2] == board[j][3]:
+                    board[j][2] = str(int(board[j][2]) + int(board[j][3]))
+                    score = score + int(board[j][2])
+                    board[j][3] = ' '
+                    dontMove = 1
         randNum()
         printing()
         checking()
@@ -461,272 +393,79 @@ while game < 1:
 # RIGHT direction with 'd'
     elif key == curses.KEY_RIGHT:
         dontMove = 0
-# RIGHT First row
-        if board[0][3] == '0':
-            if board[0][2] == '0':
-                if board[0][1] == '0':
-                    if board[0][0] == '0':
-                        pass
+# RIGHT
+        for j in range(4):
+            if board[j][3] == ' ':
+                if board[j][2] == ' ':
+                    if board[j][1] == ' ':
+                        if board[j][0] == ' ':
+                            pass
+                        else:
+                            dontMove = 1
                     else:
                         dontMove = 1
                 else:
                     dontMove = 1
             else:
-                dontMove = 1
-        else:
-            if board[0][2] == '0':
-                if board[0][1] == '0':
-                    if board[0][0] == '0':
-                        pass
+                if board[j][2] == ' ':
+                    if board[j][1] == ' ':
+                        if board[j][0] == ' ':
+                            pass
+                        else:
+                            dontMove = 1
                     else:
                         dontMove = 1
                 else:
-                    dontMove = 1
-            else:
-                if board[0][1] == '0':
-                    if board[0][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-# RIGHT Second row
-        if board[1][3] == '0':
-            if board[1][2] == '0':
-                if board[1][1] == '0':
-                    if board[1][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                dontMove = 1
-        else:
-            if board[1][2] == '0':
-                if board[1][1] == '0':
-                    if board[1][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                if board[1][1] == '0':
-                    if board[1][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-# RIGHT Third row
-        if board[2][3] == '0':
-            if board[2][2] == '0':
-                if board[2][1] == '0':
-                    if board[2][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                dontMove = 1
-        else:
-            if board[2][2] == '0':
-                if board[2][1] == '0':
-                    if board[2][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                if board[2][1] == '0':
-                    if board[2][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-# RIGHT Fourth row
-        if board[3][3] == '0':
-            if board[3][2] == '0':
-                if board[3][1] == '0':
-                    if board[3][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                dontMove = 1
-        else:
-            if board[3][2] == '0':
-                if board[3][1] == '0':
-                    if board[3][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-                else:
-                    dontMove = 1
-            else:
-                if board[3][1] == '0':
-                    if board[3][0] == '0':
-                        pass
-                    else:
-                        dontMove = 1
-# RIGHT sorting, first row
-        for i in range(3):
-            if board[0][3] == '0':
-                board[0][3] = board[0][2]
-                board[0][2] = board[0][1]
-                board[0][1] = board[0][0]
-                board[0][0] = '0'
-            else:
-                for i in range(2):
-                    if board[0][2] == '0':
-                        board[0][2] = board[0][1]
-                        board[0][1] = board[0][0]
-                        board[0][0] = '0'
-                    else:
-                        if board[0][1] == '0':
-                            board[0][1] = board[0][0]
-                            board[0][0] = '0'
-# RIGHT sorting, second row
-        for i in range(3):
-            if board[1][3] == '0':
-                board[1][3] = board[1][2]
-                board[1][2] = board[1][1]
-                board[1][1] = board[1][0]
-                board[1][0] = '0'
-            else:
-                for i in range(2):
-                    if board[1][2] == '0':
-                        board[1][2] = board[1][1]
-                        board[1][1] = board[1][0]
-                        board[1][0] = '0'
-                    else:
-                        if board[1][1] == '0':
-                            board[1][1] = board[1][0]
-                            board[1][0] = '0'
-# RIGHT sorting, third row
-        for i in range(3):
-            if board[2][3] == '0':
-                board[2][3] = board[2][2]
-                board[2][2] = board[2][1]
-                board[2][1] = board[2][0]
-                board[2][0] = '0'
-            else:
-                for i in range(2):
-                    if board[2][2] == '0':
-                        board[2][2] = board[2][1]
-                        board[2][1] = board[2][0]
-                        board[2][0] = '0'
-                    else:
-                        if board[2][1] == '0':
-                            board[2][1] = board[2][0]
-                            board[2][0] = '0'
-# RIGHT sorting, fourth row
-        for i in range(3):
-            if board[3][3] == '0':
-                board[3][3] = board[3][2]
-                board[3][2] = board[3][1]
-                board[3][1] = board[3][0]
-                board[3][0] = '0'
-            else:
-                for i in range(2):
-                    if board[3][2] == '0':
-                        board[3][2] = board[3][1]
-                        board[3][1] = board[3][0]
-                        board[3][0] = '0'
-                    else:
-                        if board[3][1] == '0':
-                            board[3][1] = board[3][0]
-                            board[3][0] = '0'
-# RIGHT to add up similar numbers, first row
-        if board[0][3] != '0':
-            if board[0][3] == board[0][2]:
-                board[0][3] = str(int(board[0][3]) + int(board[0][2]))
-                score = score + int(board[0][3])
-                board[0][2] = board[0][1]
-                board[0][1] = board[0][0]
-                board[0][0] = '0'
-                dontMove = 1
-        if board[0][2] != '0':
-            if board[0][2] == board[0][1]:
-                board[0][2] = str(int(board[0][2]) + int(board[0][1]))
-                score = score + int(board[0][2])
-                board[0][1] = board[0][0]
-                board[0][0] = '0'
-                dontMove = 1
-        if board[0][1] != '0':
-            if board[0][1] == board[0][0]:
-                board[0][1] = str(int(board[0][1]) + int(board[0][0]))
-                score = score + int(board[0][1])
-                board[0][0] = '0'
-                dontMove = 1
-# RIGHT to add up similar numbers, second row
-        if board[1][3] != '0':
-            if board[1][3] == board[1][2]:
-                board[1][3] = str(int(board[1][3]) + int(board[1][2]))
-                score = score + int(board[1][3])
-                board[1][2] = board[1][1]
-                board[1][1] = board[1][0]
-                board[1][0] = '0'
-                dontMove = 1
-        if board[1][2] != '0':
-            if board[1][2] == board[1][1]:
-                board[1][2] = str(int(board[1][2]) + int(board[1][1]))
-                score = score + int(board[1][2])
-                board[1][1] = board[1][0]
-                board[1][0] = '0'
-                dontMove = 1
-        if board[1][1] != '0':
-            if board[1][1] == board[1][0]:
-                board[1][1] = str(int(board[1][1]) + int(board[1][0]))
-                score = score + int(board[1][1])
-                board[1][0] = '0'
-                dontMove = 1
-# RIGHT to add up similar numbers, third row
-        if board[2][3] != '0':
-            if board[2][3] == board[2][2]:
-                board[2][3] = str(int(board[2][3]) + int(board[2][2]))
-                score = score + int(board[2][3])
-                board[2][2] = board[2][1]
-                board[2][1] = board[2][0]
-                board[2][0] = '0'
-                dontMove = 1
-        if board[2][2] != '0':
-            if board[2][2] == board[2][1]:
-                board[2][2] = str(int(board[2][2]) + int(board[2][1]))
-                score = score + int(board[2][2])
-                board[2][1] = board[2][0]
-                board[2][0] = '0'
-                dontMove = 1
-        if board[2][1] != '0':
-            if board[2][1] == board[2][0]:
-                board[2][1] = str(int(board[2][1]) + int(board[2][0]))
-                score = score + int(board[2][1])
-                board[2][0] = '0'
-                dontMove = 1
-# RIGHT to add up similar numbers, fourth row
-        if board[3][3] != '0':
-            if board[3][3] == board[3][2]:
-                board[3][3] = str(int(board[3][3]) + int(board[3][2]))
-                score = score + int(board[3][3])
-                board[3][2] = board[3][1]
-                board[3][1] = board[3][0]
-                board[3][0] = '0'
-                dontMove = 1
-        if board[3][2] != '0':
-            if board[3][2] == board[3][1]:
-                board[3][2] = str(int(board[3][2]) + int(board[3][1]))
-                score = score + int(board[3][2])
-                board[3][1] = board[3][0]
-                board[3][0] = '0'
-                dontMove = 1
-        if board[3][1] != '0':
-            if board[3][1] == board[3][0]:
-                board[3][1] = str(int(board[3][1]) + int(board[3][0]))
-                score = score + int(board[3][1])
-                board[3][0] = '0'
-                dontMove = 1
-        randNum()
+                    if board[j][1] == ' ':
+                        if board[j][0] == ' ':
+                            pass
+                        else:
+                            dontMove = 1
 
+# RIGHT sorting
+        for j in range(4):
+            for i in range(3):
+                if board[j][3] == ' ':
+                    board[j][3] = board[j][2]
+                    board[j][2] = board[j][1]
+                    board[j][1] = board[j][0]
+                    board[j][0] = ' '
+                else:
+                    for i in range(2):
+                        if board[j][2] == ' ':
+                            board[j][2] = board[j][1]
+                            board[j][1] = board[j][0]
+                            board[j][0] = ' '
+                        else:
+                            if board[j][1] == ' ':
+                                board[j][1] = board[j][0]
+                                board[j][0] = ' '
+
+# RIGHT to add up similar numbers
+        for j in range(4):
+            if board[j][3] != ' ':
+                if board[j][3] == board[j][2]:
+                    board[j][3] = str(int(board[j][3]) + int(board[j][2]))
+                    score = score + int(board[j][3])
+                    board[j][2] = board[j][1]
+                    board[j][1] = board[j][0]
+                    board[j][0] = ' '
+                    dontMove = 1
+            if board[j][2] != ' ':
+                if board[j][2] == board[0][1]:
+                    board[j][2] = str(int(board[j][2]) + int(board[j][1]))
+                    score = score + int(board[j][2])
+                    board[j][1] = board[j][0]
+                    board[j][0] = ' '
+                    dontMove = 1
+            if board[j][1] != ' ':
+                if board[j][1] == board[j][0]:
+                    board[j][1] = str(int(board[j][1]) + int(board[j][0]))
+                    score = score + int(board[j][1])
+                    board[j][0] = ' '
+                    dontMove = 1
+
+        randNum()
         printing()
         checking()
 # Exit button: 'q'
