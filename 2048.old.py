@@ -1,3 +1,4 @@
+import coloring
 import display
 import welcome
 import sum_print
@@ -28,6 +29,12 @@ def printing():
     partBetween2 = display.display_table(board[1])
     partBetween3 = display.display_table(board[2])
     partBetween4 = display.display_table(board[3])
+
+    colored_a = coloring.coloring_list(board[0])
+    colored_b = coloring.coloring_list(board[1])
+    colored_c = coloring.coloring_list(board[2])
+    colored_d = coloring.coloring_list(board[3])
+
 
 # print part
     sum_print.printer(board, partBetween1, partBetween2, partBetween3, partBetween4, score)
@@ -74,6 +81,9 @@ def checking():
     elif (board[3][3] == board[2][3]) or (board[3][3] == board[3][2]):
         pass
     else:
+        print()
+        print(C2 + "No more moves! Game over!" + C0)
+        print()
         curses.echo()
         curses.nocbreak()
         stdscr.keypad(0)
@@ -442,7 +452,7 @@ while game < 1:
                     board[j][0] = ' '
                     dontMove = 1
             if board[j][2] != ' ':
-                if board[j][2] == board[j][1]:
+                if board[j][2] == board[0][1]:
                     board[j][2] = str(int(board[j][2]) + int(board[j][1]))
                     score = score + int(board[j][2])
                     board[j][1] = board[j][0]
@@ -467,4 +477,4 @@ while game < 1:
         quit()
 # Wrong button handling
     else:
-        pass
+        print("Not valid key")
