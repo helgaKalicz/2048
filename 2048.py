@@ -27,6 +27,8 @@ def printing():
 
 # checking the end of the game, in case if you achive 2048 or you don't have more moves
 
+# checking everything
+
 
 def checking():
     if ('2048' in board[0]) or ('2048' in board[1]) or ('2048' in board[2]) or ('2048' in board[3]):
@@ -123,6 +125,7 @@ def randNum():
                 board[2][column] = twoOrFour
             if row == "d":
                 board[3][column] = twoOrFour
+
 
 welcome.floating_msg()
 game = 1
